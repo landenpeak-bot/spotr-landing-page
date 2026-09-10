@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPOTR | Find Your Fitness Match</title>
+  <meta name="description" content="SPOTR matches you with gyms and personal trainers based on your goals, personality, training style, budget, and schedule.">
+  <style>
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:Arial,Helvetica,sans-serif;
+      background:#f5f7fa;
+      color:#111827;
+      min-height:100vh;
+    }
+    .wrap{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .card{
+      width:100%;
+      max-width:760px;
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:22px;
+      padding:42px;
+      box-shadow:0 18px 50px rgba(17,24,39,.08);
+    }
+    .brand{
+      font-weight:800;
+      letter-spacing:.18em;
+      font-size:16px;
+      margin-bottom:18px;
+    }
+    .pill{
+      display:inline-block;
+      background:#eef2f7;
+      color:#475467;
+      border-radius:999px;
+      padding:7px 11px;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+    }
+    h1{
+      margin:18px 0 14px;
+      font-size:clamp(42px,8vw,72px);
+      line-height:.98;
+      letter-spacing:-.05em;
+    }
+    .lead{
+      color:#667085;
+      font-size:18px;
+      line-height:1.65;
+      margin:0;
+    }
+    .info{
+      margin:26px 0;
+      background:#f8fafc;
+      border:1px solid #e5e7eb;
+      border-radius:16px;
+      padding:18px 20px;
+      line-height:1.55;
+    }
+    .info span{
+      display:block;
+      color:#667085;
+      font-size:14px;
+      margin-bottom:5px;
+    }
+    .statement{
+      font-size:17px;
+      line-height:1.8;
+    }
+    .divider{
+      height:1px;
+      background:#e5e7eb;
+      margin:32px 0;
+    }
+    h2{
+      margin:0 0 8px;
+      font-size:25px;
+    }
+    .sub{
+      color:#667085;
+      line-height:1.55;
+      margin:0 0 20px;
+    }
+    label{
+      display:block;
+      font-weight:700;
+      font-size:14px;
+      margin-bottom:8px;
+    }
+    .row{
+      display:flex;
+      gap:10px;
+    }
+    input{
+      flex:1;
+      min-width:0;
+      padding:15px 16px;
+      border:1px solid #cfd4dc;
+      border-radius:12px;
+      font-size:16px;
+      outline:none;
+    }
+    input:focus{
+      border-color:#111827;
+      box-shadow:0 0 0 3px rgba(17,24,39,.08);
+    }
+    button{
+      border:0;
+      border-radius:12px;
+      background:#111;
+      color:#fff;
+      padding:15px 22px;
+      font-size:16px;
+      font-weight:800;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    button:hover{opacity:.9}
+    button:disabled{opacity:.6;cursor:not-allowed}
+    .tiny{
+      color:#98a2b3;
+      font-size:12px;
+      margin-top:10px;
+    }
+    .msg{
+      display:none;
+      margin-top:14px;
+      padding:13px 15px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+    }
+    .success{
+      display:block;
+      background:#ecfdf3;
+      border:1px solid #abefc6;
+      color:#067647;
+    }
+    .error{
+      display:block;
+      background:#fef3f2;
+      border:1px solid #fecdca;
+      color:#b42318;
+    }
+    @media (max-width:620px){
+      .card{padding:28px 22px}
+      .row{flex-direction:column}
+      button{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <div class="brand">SPOTR</div>
+      <div class="pill">COMING SOON</div>
+
+      <h1>Find your fitness match.</h1>
+
+      <p class="lead">
+        SPOTR is a fitness matchmaking platform designed to connect you with gyms and
+        personal trainers based on more than just location and price.
+      </p>
+
+      <div class="info">
+        <span>We consider your</span>
+        <strong>fitness goals, personality, coaching style, training intensity, budget, schedule, and ideal gym environment.</strong>
+      </div>
+
+      <p class="statement">
+        Stop asking <em>“What trainers are near me?”</em><br>
+        Start asking <strong>“Which trainer is right for me?”</strong>
+      </p>
+
+      <div class="divider"></div>
+
+      <h2>Would you use SPOTR?</h2>
+      <p class="sub">
+        Leave your email if you’d be interested in trying SPOTR when it launches.
+      </p>
+
+      <form id="interestForm">
+        <label for="email">Email address</label>
+        <div class="row">
+          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+          <button id="submitBtn" type="submit">I'm Interested</button>
+        </div>
+        <div class="tiny">No payment. No commitment. Just early-access updates.</div>
+        <div id="message" class="msg"></div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    /*
+      IMPORTANT:
+      Replace the value below with your Formspree endpoint when you create one.
+      Example:
+      const FORM_ENDPOINT = "https://formspree.io/f/abcdwxyz";
+
+      Until then, this page will still work visually and will save emails
+      locally in the visitor's browser for testing.
+    */
+    const FORM_ENDPOINT = "";
+
+    const form = document.getElementById("interestForm");
+    const email = document.getElementById("email");
+    const message = document.getElementById("message");
+    const submitBtn = document.getElementById("submitBtn");
+
+    function showMessage(text, type){
+      message.textContent = text;
+      message.className = "msg " + type;
+    }
+
+    form.addEventListener("submit", async function(e){
+      e.preventDefault();
+
+      const value = email.value.trim();
+
+      if(!value){
+        showMessage("Please enter a valid email address.", "error");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
+      try{
+        if(FORM_ENDPOINT){
+          const response = await fetch(FORM_ENDPOINT, {
+            method: "POST",
+            headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              email: value,
+              source: "SPOTR Landing Page"
+            })
+          });
+
+          if(!response.ok) throw new Error("Submission failed");
+
+          showMessage("You're on the list. Thanks for your interest in SPOTR.", "success");
+          form.reset();
+        } else {
+          const saved = JSON.parse(localStorage.getItem("spotr_emails") || "[]");
+          if(!saved.includes(value)) saved.push(value);
+          localStorage.setItem("spotr_emails", JSON.stringify(saved));
+
+          showMessage(
+            "Test mode is working. To actually receive these emails, connect a Formspree endpoint in the code.",
+            "success"
+          );
+          form.reset();
+        }
+      } catch(err){
+        showMessage("Something went wrong. Please try again.", "error");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "I'm Interested";
+      }
+    });
+  </script>
+</body>
+</html>
